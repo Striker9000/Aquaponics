@@ -66,7 +66,7 @@ namespace AquaponicsWinForms
             // You’ll need to map these to actual GPIO pins and possibly use ADC converters
             // like MCP3008 if your sensor outputs are analog
             */
-            
+
             // Simulate sensor values
             //double temp = 15 + rand.NextDouble() * 15; // 15–30 °C
             double tempC = 15 + rand.NextDouble() * 15;
@@ -184,6 +184,64 @@ namespace AquaponicsWinForms
         private void sensorStatusTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addProfileButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Create a new PlantProfile using the user's input
+                PlantProfile newPlant = new PlantProfile
+                {
+                    Name = nameTextBox.Text,
+                    TempMinF = double.Parse(tempMinTextBox.Text),
+                    TempMaxF = double.Parse(tempMaxTextBox.Text),
+                    MoistureMin = double.Parse(moistureMinTextBox.Text),
+                    MoistureMax = double.Parse(moistureMaxTextBox.Text),
+                    PhMin = double.Parse(phMinTextBox.Text),
+                    PhMax = double.Parse(phMaxTextBox.Text),
+                    LightMin = double.Parse(lightMinTextBox.Text),
+                    LightMax = double.Parse(lightMaxTextBox.Text),
+                    WaterLevelMin = double.Parse(waterLevelMinTextBox.Text),
+                    WaterLevelMax = double.Parse(waterLevelMaxTextBox.Text)
+                };
+
+                // Add the new plant to the dictionary
+                plantProfiles.Add(newPlant.Name, newPlant);
+
+                // Update the plant selection ComboBox
+                plantProfileComboBox.Items.Add(newPlant.Name);
+
+                // Show success message
+                MessageBox.Show($"Plant Profile '{newPlant.Name}' added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Optional: Clear the textboxes after adding
+                nameTextBox.Clear();
+                tempMinTextBox.Clear();
+                tempMaxTextBox.Clear();
+                moistureMinTextBox.Clear();
+                moistureMaxTextBox.Clear();
+                phMinTextBox.Clear();
+                phMaxTextBox.Clear();
+                lightMinTextBox.Clear();
+                lightMaxTextBox.Clear();
+                waterLevelMinTextBox.Clear();
+                waterLevelMaxTextBox.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding plant profile: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
