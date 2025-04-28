@@ -30,6 +30,7 @@
             tabControl1 = new TabControl();
             MonitorPage = new TabPage();
             AddPlantPage = new TabPage();
+            plantTypeComboBox = new ComboBox();
             addProfileButton = new Button();
             waterLevelMaxTextBox = new TextBox();
             waterLevelMinTextBox = new TextBox();
@@ -148,6 +149,7 @@
             // 
             // AddPlantPage
             // 
+            AddPlantPage.Controls.Add(plantTypeComboBox);
             AddPlantPage.Controls.Add(addProfileButton);
             AddPlantPage.Controls.Add(waterLevelMaxTextBox);
             AddPlantPage.Controls.Add(waterLevelMinTextBox);
@@ -179,6 +181,17 @@
             AddPlantPage.TabIndex = 1;
             AddPlantPage.Text = "Add Plant";
             AddPlantPage.UseVisualStyleBackColor = true;
+            // 
+            // plantTypeComboBox
+            // 
+            plantTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            plantTypeComboBox.FormattingEnabled = true;
+            plantTypeComboBox.Items.AddRange(new object[] { "PlantProfile", "LeafyGreenProfile", "FruitBearingPlantProfile" });
+            plantTypeComboBox.Location = new Point(337, 10);
+            plantTypeComboBox.Name = "plantTypeComboBox";
+            plantTypeComboBox.Size = new Size(121, 23);
+            plantTypeComboBox.TabIndex = 24;
+            plantTypeComboBox.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // addProfileButton
             // 
@@ -430,5 +443,6 @@
         private TextBox lightMinTextBox;
         private TextBox phMaxTextBox;
         private Button addProfileButton;
+        private ComboBox plantTypeComboBox;
     }
 }

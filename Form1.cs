@@ -178,7 +178,10 @@ namespace AquaponicsWinForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            /*plantTypeComboBox.Items.Add("PlantProfile");
+            plantTypeComboBox.Items.Add("LeafyGreenProfile");
+            plantTypeComboBox.Items.Add("FruitBearingPlantProfile");*/
+            plantTypeComboBox.SelectedIndex = 0; // Default selection
         }
 
         private void sensorStatusTextBox_TextChanged(object sender, EventArgs e)
@@ -198,7 +201,7 @@ namespace AquaponicsWinForms
 
         private void addProfileButton_Click(object sender, EventArgs e)
         {
-            try
+            /*try
             {
                 // Create a new PlantProfile using the user's input
                 PlantProfile newPlant = new PlantProfile
@@ -242,6 +245,84 @@ namespace AquaponicsWinForms
             {
                 MessageBox.Show($"Error adding plant profile: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            */
+            try
+            {
+                string selectedType = plantTypeComboBox.SelectedItem.ToString();
+                PlantProfile newPlant;
+
+                if (selectedType == "LeafyGreenProfile")
+                {
+                    LeafyGreenProfile leafy = new LeafyGreenProfile();
+                    leafy.Name = nameTextBox.Text;
+                    leafy.TempMinF = double.Parse(tempMinTextBox.Text);
+                    leafy.TempMaxF = double.Parse(tempMaxTextBox.Text);
+                    leafy.MoistureMin = double.Parse(moistureMinTextBox.Text);
+                    leafy.MoistureMax = double.Parse(moistureMaxTextBox.Text);
+                    leafy.PhMin = double.Parse(phMinTextBox.Text);
+                    leafy.PhMax = double.Parse(phMaxTextBox.Text);
+                    leafy.LightMin = double.Parse(lightMinTextBox.Text);
+                    leafy.LightMax = double.Parse(lightMaxTextBox.Text);
+                    leafy.WaterLevelMin = double.Parse(waterLevelMinTextBox.Text);
+                    leafy.WaterLevelMax = double.Parse(waterLevelMaxTextBox.Text);
+                    leafy.HarvestDays = 30; // Example default or you can ask user
+                    newPlant = leafy;
+                }
+                else if (selectedType == "FruitBearingPlantProfile")
+                {
+                    FruitBearingPlantProfile fruit = new FruitBearingPlantProfile();
+                    fruit.Name = nameTextBox.Text;
+                    fruit.TempMinF = double.Parse(tempMinTextBox.Text);
+                    fruit.TempMaxF = double.Parse(tempMaxTextBox.Text);
+                    fruit.MoistureMin = double.Parse(moistureMinTextBox.Text);
+                    fruit.MoistureMax = double.Parse(moistureMaxTextBox.Text);
+                    fruit.PhMin = double.Parse(phMinTextBox.Text);
+                    fruit.PhMax = double.Parse(phMaxTextBox.Text);
+                    fruit.LightMin = double.Parse(lightMinTextBox.Text);
+                    fruit.LightMax = double.Parse(lightMaxTextBox.Text);
+                    fruit.WaterLevelMin = double.Parse(waterLevelMinTextBox.Text);
+                    fruit.WaterLevelMax = double.Parse(waterLevelMaxTextBox.Text);
+                    fruit.FruitType = "Tomato"; // Example default or you can ask user
+                    newPlant = fruit;
+                }
+                else
+                {
+                    PlantProfile plant = new PlantProfile();
+                    plant.Name = nameTextBox.Text;
+                    plant.TempMinF = double.Parse(tempMinTextBox.Text);
+                    plant.TempMaxF = double.Parse(tempMaxTextBox.Text);
+                    plant.MoistureMin = double.Parse(moistureMinTextBox.Text);
+                    plant.MoistureMax = double.Parse(moistureMaxTextBox.Text);
+                    plant.PhMin = double.Parse(phMinTextBox.Text);
+                    plant.PhMax = double.Parse(phMaxTextBox.Text);
+                    plant.LightMin = double.Parse(lightMinTextBox.Text);
+                    plant.LightMax = double.Parse(lightMaxTextBox.Text);
+                    plant.WaterLevelMin = double.Parse(waterLevelMinTextBox.Text);
+                    plant.WaterLevelMax = double.Parse(waterLevelMaxTextBox.Text);
+                    newPlant = plant;
+                }
+
+                // Add to dictionary
+                plantProfiles.Add(newPlant.Name, newPlant);
+
+                // Update ComboBox or List
+                plantProfileComboBox.Items.Add(newPlant.Name);
+
+                MessageBox.Show($"{selectedType} '{newPlant.Name}' added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Optional clear
+                //ClearInputFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
